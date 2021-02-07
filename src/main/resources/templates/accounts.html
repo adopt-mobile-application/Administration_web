@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Account Web Application</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+    <link  rel="stylesheet" href="css/posts.css"/>
+
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">ADOPT APP</a>
+
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/accounts}">Accounts<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/posts}">Posts<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}" >Disconnect<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-4" th:each="account:${accounts}">
+            <div class="card shadow">
+                <p class="card-body text-center">
+                    <a href="#">
+                        <img
+                                class="rounded-circle"
+                                width="200"
+                                height="200"
+                                th:src="${account.picture == null } ? 'https://biahoscode.me/img/bg-masthead.jpg' : ${account.picture}" alt="">
+                    </a>
+                    <table class="table table-sm  table-striped">
+                        <tr> <td>first name:</td> <td class="list-group-item" th:text="${account.first_name == null } ? 'null value' : ${account.first_name} "></td></tr>
+                        <tr> <td>last name:</td><td class="list-group-item" th:text="${account.last_name == null } ? 'null value' : ${account.last_name} "></td></tr>
+                        <tr><td>Phone:</td><td  class="list-group-item" th:text="${account.num_tel == null } ? 'null value' :${account.num_tel} "></td></tr>
+                        <tr><td>Address:</td><td  class="list-group-item" th:text="${account.address == null } ? 'null value' : ${account.address}"></td></tr>
+                        <tr><td>Verified:</td><td  class="list-group-item" th:switch="${account.verified}">
+                            <p th:case="true" style="color:#0fad00" >Verified</p>
+                            <p th:case="false" style="color:#FF0000" >Not Verified</p>
+                        </td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <button th:onclick="'javascript:myFunction(' + ${account.id_account} + ');'" class="btn btn-danger" ><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function myFunction(param) {
+  var r = confirm("Do you really want to delete this account ?");
+  if (r == true) {
+    location.replace(param)
+  }
+}
+</script>
+</body>
+</html>

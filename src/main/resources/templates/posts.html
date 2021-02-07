@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html xmlns:xs="http://www.w3.org/1999/xhml"
+      xmlns:th="http://www.thymeleaf.org">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link  rel="stylesheet" href="css/posts.css"/>
+<script src="js/angular.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<!------ Include the above in your HEAD tag ---------->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">ADOPT APP</a>
+
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/accounts}">Accounts<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/posts}">Posts<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}" >Disconnect<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<div class="container mb-4">
+    <div class="row">
+        <div th:each="post: ${posts}" class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-4">
+            <div class="card shadow">
+
+                <div class="card-body text-center">
+                    <marquee width="100%" scrollamount="12" scrolldelay="100">
+                        <img th:src="'https://res.cloudinary.com/mtl9/'+${post.id_post}+'image1'" width="315" height="209"/>
+                        <img th:src="'https://res.cloudinary.com/mtl9/'+${post.id_post}+'image2'" width="315" height="209"/>
+                        <img th:src="'https://res.cloudinary.com/mtl9/'+${post.id_post}+'image3'" width="315" height="209"/>
+                    </marquee>
+               
+                   <table class="table table-sm  table-striped">
+                    <tr> <td>Race:</td> <td class="list-group-item" th:text="${post.race}"></td></tr>
+                       <tr> <td>Color:</td><td class="list-group-item" th:text="${post.color}"></td></tr>
+                         <tr><td>Age:</td><td  class="list-group-item" th:text="${post.age}"></td></tr>
+                         <tr><td>Gender:</td><td  class="list-group-item" th:text="${post.gender}"></td></tr>
+                          <tr><td>Species:</td><td  class="list-group-item" th:text="${post.species}"></td></tr>
+                        </table>  
+                   
+                   <hr>
+                    <p class="lead" th:text="${post.description}"></p>
+                    <hr>
+                    <ul class="list-inline mt-3">
+                        <li class="list-inline-item"><img th:src="${post.account.picture}"  class="rounded-circle" width="50" height="50"/><span th:text="${post.account.last_name}"> </span></li>
+                        <li class="list-inline-item"><i class="far fa-clock"></i> <span th:text="${post.date}"></span></li>
+                    </ul>
+                    <a th:href="@{/deletePost/{id}(id=${post.id_post})}" class="btn btn-outline-dark my-2" href="#" role="button"><i class="fas fa-trash-alt"></i></a>
+
+                    <a th:href="@{/acceptPost/{id}(id=${post.id_post})}" class="btn btn-outline-dark my-2"  role="button"><i class="fas fa-user-check"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</html>
+
