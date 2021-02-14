@@ -16,12 +16,26 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<style>
+#logo{
+margin-left:0px; 
+}
+#fiche{
+background-color:#b3ffe0;
+
+}
+</style>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+	<img id ="logo" width="100" height="100" src="images/Adoptini.png">
+
     <a class="navbar-brand" href="#">ADOPT APP</a>
 
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+       	 
+        
             <li class="nav-item active">
                 <a class="nav-link" th:href="@{/accounts}">Accounts<span class="sr-only">(current)</span></a>
             </li>
@@ -35,18 +49,17 @@
 
     </div>
 </nav>
-
 <div class="container mb-4">
     <div class="row">
         <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-4" th:each="account:${accounts}">
-            <div class="card shadow">
+            <div class="card shadow" id="fiche">
                 <p class="card-body text-center">
                     <a href="#">
                         <img
                                 class="rounded-circle"
                                 width="200"
                                 height="200"
-                                th:src="${account.picture == null } ? 'https://biahoscode.me/img/bg-masthead.jpg' : ${account.picture}" alt="">
+                                th:src="${account.picture == null } ? 'https://cdn.icon-icons.com/icons2/1769/PNG/512/4092564-about-mobile-ui-profile-ui-user-website_114033.png' : ${account.picture}" alt="">
                     </a>
                     <table class="table table-sm  table-striped">
                         <tr> <td>first name:</td> <td class="list-group-item" th:text="${account.first_name == null } ? 'null value' : ${account.first_name} "></td></tr>
